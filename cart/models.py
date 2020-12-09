@@ -1,8 +1,5 @@
 from django.db import models
 from django.conf import settings
-from django.contrib.postgres.fields import ArrayField
-from decimal import Decimal
-
 from main.models import Product
 
 
@@ -20,4 +17,3 @@ class OrderItems(models.Model):
     order = models.ForeignKey(Orders, related_name='items', on_delete=models.CASCADE)
     product = models.ForeignKey(Product, related_name='order_items', on_delete=models.CASCADE)
     quantity = models.PositiveIntegerField(default=0)
-

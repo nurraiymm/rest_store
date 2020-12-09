@@ -2,10 +2,7 @@ from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.decorators import action
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
-from rest_framework.views import APIView
-
 from .filters import ProductFilter
-from rest_framework.viewsets import ModelViewSet
 from rest_framework import filters, viewsets
 from main.models import Product, Comment, Like
 from .serializers import ProductDetailsSerializer, CommentSerializer, LikeSerializer
@@ -47,8 +44,6 @@ class ProductViewSet(viewsets.ModelViewSet):
         return Response({'status': status})
 
 
-
-
 class CommentViewSet(viewsets.ModelViewSet):
     serializer_class = CommentSerializer
     permission_classes = [ProductPermission, ]
@@ -60,10 +55,3 @@ class CommentViewSet(viewsets.ModelViewSet):
         else:
             permissions = [IsCommentAuthor, ]
         return [permission() for permission in permissions]
-
-# class AddStarRatingView(APIView):
-#     "добавление рейтинга продукту"
-#
-#     def post(self, request):
-#         serializer = CreateRatingSerializer(data=request.data)
-

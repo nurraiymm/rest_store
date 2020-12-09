@@ -2,13 +2,10 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.hashers import make_password
 from rest_framework import viewsets, permissions
 from rest_framework.permissions import IsAuthenticated
-
 from cart.models import Orders
 from main.models import Product
-from cart.serializers import ProductsSerializer, OrdersSerializer
-from cart.serializers import UserSerializer
-from cart.permissions import IsOwnerOrReadOnly
-from cart.permissions import IsStaffOrTargetUser
+from cart.serializers import ProductsSerializer, OrdersSerializer, UserSerializer
+from cart.permissions import IsOwnerOrReadOnly, IsStaffOrTargetUser
 
 User = get_user_model()
 
