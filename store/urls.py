@@ -5,6 +5,7 @@ from django.urls import path, include
 from rest_framework.routers import DefaultRouter
 
 from cart.views import OrdersViewSet
+from main import views
 from main.views import ProductViewSet, CommentViewSet
 
 router = DefaultRouter()
@@ -17,4 +18,5 @@ urlpatterns = [
     path('api-auth/', include('rest_framework.urls')),
     path('accounts/', include('account.urls')),
     path('', include(router.urls)),
+    # path('rating/', views.AddStarRatingView.as_view()),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Product, Category, Comment
+from .models import Product, Category, Comment, Like
 
 
 class CommentSerializer(serializers.ModelSerializer):
@@ -46,6 +46,14 @@ class ProductSerializer(serializers.ModelSerializer):
         return representation
 
 
+class LikeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Like
+        fields = [
+            'user', 'product', 'like'
+        ]
+
+
 class ProductDetailsSerializer(serializers.ModelSerializer):
 
     class Meta:
@@ -66,6 +74,7 @@ class ProductDetailsSerializer(serializers.ModelSerializer):
         representation = super().to_representation(instance)
         representation['image'] = self._get_image_url(instance)
         representation['categories'] = CategorySerializer(instance.categories.all(), many=True).data
+        representation['total_likes'] = instance.likes.filter(like=True).count()
         return representation
 
 

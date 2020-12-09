@@ -48,3 +48,12 @@ class Comment(models.Model):
 
     def __str__(self):
         return f"{self.author}: {self.text}"
+
+
+class Like(models.Model):
+    user = models.ForeignKey(User, related_name='users', on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, related_name='likes', on_delete=models.CASCADE)
+    like = models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.like
